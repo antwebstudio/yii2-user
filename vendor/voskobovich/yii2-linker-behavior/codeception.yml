@@ -1,0 +1,20 @@
+actor: Tester
+paths:
+    tests: tests
+    log: tests/_output
+    data: tests/_data
+    helpers: tests/_support
+settings:
+    bootstrap: _bootstrap.php
+    colors: false
+    memory_limit: 1024M
+modules:
+   enabled:
+      - Db:
+         dsn: 'sqlite:tests/_output/db.sqlite3'
+         user: ''
+         password: ''
+         dump: 'tests/_data/dump.sql'
+         populate: true # run populator before all tests
+         cleanup: true # run populator before each test
+         populator: 'cat $dump | sqlite3 tests/_output/db.sqlite3'

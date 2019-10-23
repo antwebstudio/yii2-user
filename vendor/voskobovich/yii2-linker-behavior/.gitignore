@@ -1,0 +1,11 @@
+# phpstorm project files
+.idea
+.directory
+composer.lock
+vendor
+tests/_log/*
+tests/_runtime/*
+tests/unit/UnitTester.php
+# sublime
+*.sublime-project
+*.sublime-workspace

@@ -1,0 +1,44 @@
+{
+    "name": "antweb/yii2-user",
+    "description": "User module",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Hui Yang",
+            "email": "chy1988@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "~2.0.0",
+		"yiisoft/yii2-authclient": "~2.0",
+        "yii2-starter-kit/yii2-file-kit": "^2.0",
+		"antweb/yii2-core" : "*",
+		"antweb/yii2-core-module" : "*",
+        "kartik-v/yii2-builder": "*"
+	},
+    "require-dev": {
+        "yiisoft/yii2-gii": "~2.0.0"
+	},
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+		{
+			"type": "composer",
+			"url": "http://packagist.antwebstudio.com"
+		}
+    ],
+    "autoload": {
+        "psr-4": {
+			"ant\\" : "src",
+			"common\\" : "src/common",
+			"frontend\\" : "src/frontend",
+			"backend\\" : "src/backend",
+			"console\\" : "src/console",
+			"tests\\" : "tests"
+		}
+    }
+}

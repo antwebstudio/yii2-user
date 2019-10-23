@@ -1,0 +1,38 @@
+{
+    "name": "shaqman/yii2-queue-mailer",
+    "description": "Background mailer decorator for Yii2",
+    "type": "yii2-extension",
+    "keywords": [
+        "yii2",
+        "background",
+        "mailer",
+        "queue"
+    ],
+    "homepage": "https://github.com/shaqman/yii2-queue-mailer",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexey Samoylov",
+            "email": "alexey.samoylov@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Syakur Rahman",
+            "email": "shaqman2004@yahoo.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/shaqman/yii2-queue-mailer/issues",
+        "source": "https://github.com/shaqman/yii2-queue-mailer"
+    },
+    "require": {
+        "yiisoft/yii2": "~2.0.13",
+        "yiisoft/yii2-queue": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "shaqman\\mailer\\queuemailer\\": "./src"
+        }
+    }
+}

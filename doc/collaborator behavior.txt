@@ -1,0 +1,4 @@
+1. enable organization and collaborator module, run migrations
+2. link the model with organization
+3. use $model->organization->addCollaborator() to add collaborator 
+ 

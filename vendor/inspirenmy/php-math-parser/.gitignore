@@ -1,0 +1,7 @@
+/vendor/
+/nbproject
+composer.lock
+.buildpath
+.project
+.settings/
+*.swp
