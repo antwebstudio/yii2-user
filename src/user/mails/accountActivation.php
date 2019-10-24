@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
-/* @var $user common\models\User */
+/* @var $user ant\models\User */
 /* @var $activationCode */
 /* @var $activationLink */
 

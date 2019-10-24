@@ -12,7 +12,7 @@ class M191004071246Permissions extends Migration
 	
 	public function init() {
 		$this->permissions = [
-			\frontend\modules\user\controllers\ActivationController::className() => [
+			\ant\user\controllers\ActivationController::className() => [
 				'activation' => ['User Activation', [Role::ROLE_USER]],
 				'resend-code' => ['Resend user activation code', [Role::ROLE_USER]],
 				'token-activation' => ['Token Activation', [Role::ROLE_GUEST]],

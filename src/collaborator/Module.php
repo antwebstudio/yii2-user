@@ -2,15 +2,8 @@
 
 namespace ant\collaborator;
 
-/**
- * payment module definition class
- */
 class Module extends \yii\base\Module
 {
-    /**
-     * @inheritdoc
-     */
-    public $controllerNamespace = 'ant\collaborator\controllers';
 
     /**
      * @inheritdoc

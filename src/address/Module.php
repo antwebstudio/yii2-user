@@ -1,9 +1,9 @@
 <?php
 
-namespace ant\contact;
+namespace ant\address;
 
 /**
- * contact module definition class
+ * address module definition class
  */
 class Module extends \yii\base\Module
 {

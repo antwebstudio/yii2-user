@@ -7,8 +7,8 @@ use ant\rbac\Migration;
 use ant\rbac\Role;
 use ant\rbac\rules\IsOwnModelRule;
 use ant\user\models\UserProfile;
-use frontend\modules\user\controllers\SettingController;
-use frontend\modules\user\controllers\ProfilesController;
+use ant\user\controllers\SettingController;
+use ant\user\controllers\ProfilesController;
 use backend\modules\user\controllers\UserController;
 use backend\modules\user\controllers\InviteController;
 use backend\modules\user\controllers\ConfigController;
@@ -19,7 +19,7 @@ class M170622021848_user_permissions extends Migration
 
 	public function init() {
 		$this->permissions = [
-			\frontend\modules\user\controllers\DashboardController::className() => [
+			\ant\user\controllers\DashboardController::className() => [
 				'index' => ['User Dashboard', [Role::ROLE_USER]],
 			],
 			SettingController::className() => [
