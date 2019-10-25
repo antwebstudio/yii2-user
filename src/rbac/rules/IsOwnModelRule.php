@@ -18,4 +18,3 @@ class IsOwnModelRule extends Rule
         return $user && ($user === $params['model']->{$attribute} || $params['model']->isNewRecord);
     }
 }
-?>

@@ -12,7 +12,7 @@ class M180226041700_user_backend_permissions extends Migration
 
 	public function init() {
 		$this->permissions = [
-			\backend\modules\user\controllers\UserController::className() => [
+			\ant\user\backend\controllers\UserController::className() => [
 				'index' => ['Manage user profiles', [Role::ROLE_ADMIN]],
 				'view' => ['View user profile detail', [Role::ROLE_USER]],
 				'create' => ['Create user profile', [Role::ROLE_ADMIN]],
@@ -31,18 +31,18 @@ class M180226041700_user_backend_permissions extends Migration
 				'email-activation-code' => ['Email activation code to registered user', [Role::ROLE_ADMIN]],
 				'role' => ['Setting user role', [Role::ROLE_ADMIN]],
 			],
-			\backend\modules\user\controllers\ProfilesController::className() => [
+			\ant\user\backend\controllers\ProfilesController::className() => [
 				'index' => ['Manage user profiles', [Role::ROLE_ADMIN]],
 				//'view' => ['View user profiles', [Role::ROLE_USER]],
 				'create' => ['Create user profile', [Role::ROLE_ADMIN]],
 				'update' => ['Update user profile', [Role::ROLE_ADMIN]],
 				'delete' => ['Delete user profile', [Role::ROLE_ADMIN]],
 			],
-			\backend\modules\user\controllers\SettingController::className() => [
+			\ant\user\backend\controllers\SettingController::className() => [
 				'index' => ['Update user profiles', [Role::ROLE_ADMIN]],
 				'password' => ['Update own account password', [Role::ROLE_ADMIN]],
 			],
-			\backend\modules\user\controllers\ConfigController::className() => [
+			\ant\user\backend\controllers\ConfigController::className() => [
 				'main' => ['Manage user config', [Role::ROLE_ADMIN]],
 				'index' => ['Manage user config', [Role::ROLE_ADMIN]],
 				'view' => ['View user config', [Role::ROLE_ADMIN]],

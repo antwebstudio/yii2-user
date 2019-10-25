@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\modules\user;
+namespace ant\user\backend;
 use ant\user\models\UserProfile;
 /**
  * ecommerce module definition class

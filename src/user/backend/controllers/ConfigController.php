@@ -1,5 +1,5 @@
 <?php 
-namespace backend\modules\user\controllers;
+namespace ant\user\backend\controllers;
 
 use Yii;
 use yii\web\Controller;
@@ -21,9 +21,9 @@ class ConfigController extends Controller
 {
     /*public function actionIndex()
     {
-        $query = UserInvite::find()->andWhere(['is not', 'user_id' , NULL])->andWhere(['or', ['type' => null], ['type' => \backend\modules\user\Module::INVITE_TYPE_ROLE] ]);
+        $query = UserInvite::find()->andWhere(['is not', 'user_id' , NULL])->andWhere(['or', ['type' => null], ['type' => \ant\user\backend\Module::INVITE_TYPE_ROLE] ]);
         $dataProvider = new ActiveDataProvider(['query' => $query]);
-        //$configRecordRows = Yii::$app->getModule('user')->getUserConfigRecords(\backend\modules\user\Module::INVITE_TYPE_ROLE);
+        //$configRecordRows = Yii::$app->getModule('user')->getUserConfigRecords(\ant\user\backend\Module::INVITE_TYPE_ROLE);
 
         $configRecordRows = [];
         if (isset(Yii::$app->getModule('user')->inviteModel['default']['fields'])) {

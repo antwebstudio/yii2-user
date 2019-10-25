@@ -40,10 +40,6 @@ class ActivationCodeRequestForm extends Model
             ],
         ];
     }
-	
-	public function init() {
-		if (YII_DEBUG) throw new \Exception('DEPRECATED'); // Added 2019-10-04
-	}
 
     /**
      * Send activation code to user via email.
@@ -52,7 +48,7 @@ class ActivationCodeRequestForm extends Model
      */
     public function send()
     {
-		if (YII_DEBUG) throw new \Exception('DEPRECATED'); // Added 2019-10-04
+		if (YII_DEBUG && YII_LOCALHOST) throw new \Exception('DEPRECATED'); // Added 2019-10-04
 		
         if (!$this->validate()) return false;
 
@@ -75,7 +71,7 @@ class ActivationCodeRequestForm extends Model
     }
 
     public static function createToken($user) {
-		if (YII_DEBUG) throw new \Exception('DEPRECATED'); // Added 2019-10-04
+		if (YII_DEBUG && YII_LOCALHOST) throw new \Exception('DEPRECATED'); // Added 2019-10-04
 		
 		$tokenIds = Token::find()
 			->alias('token')
@@ -100,7 +96,7 @@ class ActivationCodeRequestForm extends Model
      */
     public static function sendActivationEmail($user)
     {
-		if (YII_DEBUG) throw new \Exception('DEPRECATED'); // Added 2019-10-04
+		if (YII_DEBUG && YII_LOCALHOST) throw new \Exception('DEPRECATED'); // Added 2019-10-04
 		
 		$model = new self;
 		$model->user = $user;
@@ -115,7 +111,7 @@ class ActivationCodeRequestForm extends Model
      * @return string
      */
     public static function generateActivationCode(){
-		if (YII_DEBUG) throw new \Exception('DEPRECATED'); // Added 2019-10-04
+		if (YII_DEBUG && YII_LOCALHOST) throw new \Exception('DEPRECATED'); // Added 2019-10-04
 		
         return Yii::$app->security->generateRandomString(self::ACTIVATION_CODE_LENGTH);
     }

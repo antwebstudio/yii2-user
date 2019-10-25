@@ -5,6 +5,7 @@ namespace ant\user\migrations\rbac;
 use yii\db\Schema;
 use ant\rbac\Migration;
 use ant\rbac\Role;
+use ant\rbac\rules\AuthenticatedUserRule;
 
 class M190225092309_alter_user_autheticated_rule extends Migration
 {
@@ -47,7 +48,7 @@ class M190225092309_alter_user_autheticated_rule extends Migration
 		
 		// Add back "user" role
 		$userRole = $this->auth->createRole(Role::ROLE_USER);
-		$userRole->ruleName = \ant\user\rules\AuthenticatedUserRule::className();
+		$userRole->ruleName = AuthenticatedUserRule::className();
 		$this->auth->add($userRole);
 		
 		/*

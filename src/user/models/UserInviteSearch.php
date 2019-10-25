@@ -42,7 +42,7 @@ class UserInviteSearch extends UserInvite
      */
     public function search($params)
     {
-        $query = UserInvite::find()->joinWith('user user')->andWhere(['or', ['type' => null], ['type' => \backend\modules\user\Module::INVITE_TYPE_ROLE] ]);
+        $query = UserInvite::find()->joinWith('user user')->andWhere(['or', ['type' => null], ['type' => \ant\user\backend\Module::INVITE_TYPE_ROLE] ]);
 
         // add conditions that should always apply here
 

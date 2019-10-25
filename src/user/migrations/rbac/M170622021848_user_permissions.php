@@ -9,9 +9,9 @@ use ant\rbac\rules\IsOwnModelRule;
 use ant\user\models\UserProfile;
 use ant\user\controllers\SettingController;
 use ant\user\controllers\ProfilesController;
-use backend\modules\user\controllers\UserController;
-use backend\modules\user\controllers\InviteController;
-use backend\modules\user\controllers\ConfigController;
+use ant\user\backend\controllers\UserController;
+use ant\user\backend\controllers\InviteController;
+use ant\user\backend\controllers\ConfigController;
 
 class M170622021848_user_permissions extends Migration
 {

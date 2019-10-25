@@ -33,7 +33,7 @@ $action = $isNewRecord ? ['send'] : ['update', 'id' => $model->getModel('userInv
 					'template' => '<div class="input-group"><span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>{input}</div>'
 				])->textInput(['autofocus' => true, 'class' => 'form-control', 'placeholder' => 'Email Address']) ?>
 
-				<?= $form->field($model->getModel('userInvite'), 'type')->hiddenInput(['value' => \backend\modules\user\Module::INVITE_TYPE_ROLE])->label(false) ?>
+				<?= $form->field($model->getModel('userInvite'), 'type')->hiddenInput(['value' => \ant\user\backend\Module::INVITE_TYPE_ROLE])->label(false) ?>
 			<?php else: ?>
 				<?= $form->field($model->getModel('userInvite'), 'email')->hiddenInput()->label(false) ?>
 			<?php endif ?>

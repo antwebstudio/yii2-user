@@ -15,7 +15,7 @@ use kartik\file\FileInput;
 use kartik\select2\Select2;
 
 use ant\user\models\UserProfile;
-use ant\address\widgets\Address\Address;
+use ant\address\widgets\Address;
 use ant\address\models\AddressCountry;
 use ant\address\models\AddressZone;
 

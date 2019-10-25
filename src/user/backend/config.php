@@ -2,7 +2,7 @@
 
 return [
     'id' => 'user',
-    'class' => \backend\modules\user\Module::className(),
+    'class' => \ant\user\backend\Module::className(),
     'isCoreModule' => false,
 	'depends' => [],
 ];
