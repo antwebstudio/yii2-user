@@ -82,7 +82,8 @@ class Module extends \yii\base\Module
 				'class' => 'ant\user\models\SignupForm',
 				'on '.\ant\user\models\SignupForm::EVENT_AFTER_SIGNUP => function($event) {
 					$model = $event->sender;
-					$model->sendActivationEmail();
+					$notification = new \ant\user\notifications\Activation($model->user);
+					\Yii::$app->notifier->send($model->user, $notification);
 					\Yii::$app->user->login($model->user);
 				}
 			],

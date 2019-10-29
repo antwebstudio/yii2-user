@@ -6,11 +6,11 @@
     'items' => [
         [
             'label' => 'Profile',
-            'url' => ['/user/setting/index'],
+            'url' => ['/user/backend/setting/index'],
         ],
         [
             'label' => 'Change Password',
-            'url' => ['/user/setting/password'],
+            'url' => ['/user/backend/setting/password'],
         ]
     ],
 ]) ?>

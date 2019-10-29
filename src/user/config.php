@@ -6,6 +6,7 @@ return [
     'isCoreModule' => false,
 	'modules' => [
 		'v1' => \ant\user\api\v1\Module::class,
+		'backend' => \ant\user\backend\Module::class,
 	],
 	'depends' => ['address', 'token', 'contact'],
 ];

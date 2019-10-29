@@ -9,8 +9,6 @@ use yii\helpers\Html;
 use yii\helpers\Json;
 
 use ant\base\MultiModel;
-use frontend\filters\AccessControl;
-use frontend\filters\AccessRule;
 
 use Intervention\Image\ImageManagerStatic;
 use trntv\filekit\actions\DeleteAction;
@@ -94,20 +92,6 @@ class SettingController extends Controller
     {
     	return
         [
-            'access' =>
-            [
-                'class' => AccessControl::className(),
-                'ruleConfig' => ['class' => AccessRule::className()],
-                'rules' =>
-                [
-                    [
-                        'allow' => true,
-                        'roles' => [AccessRule::ROLE_ACTIVATED],
-                    ],
-
-
-                ],
-            ],
             'verbs' =>
             [
                'class' => VerbFilter::className(),

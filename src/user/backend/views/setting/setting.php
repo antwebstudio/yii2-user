@@ -15,7 +15,7 @@ use kartik\file\FileInput;
 use kartik\select2\Select2;
 
 use ant\user\models\UserProfile;
-use ant\address\widgets\Address\Address;
+use ant\address\widgets\Address;
 use ant\address\models\AddressCountry;
 use ant\address\models\AddressZone;
 
@@ -23,7 +23,7 @@ $this->title = "Update Profile";
 
 $this->params['title'] = $this->title;
 
-$this->params['breadcrumbs'][] = ['label' => 'Setting', 'url' => ['/user/setting']];
+$this->params['breadcrumbs'][] = ['label' => 'Setting', 'url' => ['/user/backend.setting']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->params['sideNav'] = $sideNav;
