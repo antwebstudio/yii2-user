@@ -1,8 +1,0 @@
-digraph G {
-	rankdir="LR";
-
-	draft     -> {ready delivered};
-	ready     -> {draft delivered};
-	delivered -> {payed archived};
-	payed     -> archived;
-}
