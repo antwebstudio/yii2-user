@@ -37,14 +37,14 @@ class UserIdentity extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        return [
+        return $this->getCombinedRules([
             [['user_id'], 'integer'],
             [['value'], 'required'],
             [['type'], 'string', 'max' => 10],
             [['value'], 'string', 'max' => 20],
             [['value'], 'unique', 'message' => '{attribute} "{value}" is already exist. ', 'targetAttribute' => ['type', 'value']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
-        ];
+        ]);
     }
 
     /**
