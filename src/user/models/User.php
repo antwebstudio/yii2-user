@@ -146,6 +146,7 @@ class User extends ActiveRecord implements IdentityInterface, NotifiableInterfac
         [
             [['username', 'email'], 'required', 'on' => ['default', self::SCENARIO_EMAIL_AS_USERNAME]],
 			[['username', 'email'], 'filter', 'filter' => 'strtolower'],
+			[['email'], 'email'],
             [['username', 'status'], 'required', 'on' => self::SCENARIO_NO_REQUIRED_EMAIL],
             [['username'], 'match', 'pattern' => '/^[a-z]\w*$/i', 'when' => function($model) {
                 return strpos($model->username, '@') === false;
