@@ -28,6 +28,8 @@ class PasswordForm extends Model
      * @var
      */
     public $confirmPassword;
+	
+	public $needOldPassword = true;
 
     /**
      * Set user
@@ -60,12 +62,13 @@ class PasswordForm extends Model
      */
     public function changePassword()
     {
-        if(Yii::$app->user->identity->validatePassword($this->oldPassword)){
+        if(!$this->needOldPassword || Yii::$app->user->identity->validatePassword($this->oldPassword)) {
             $user = $this->getUser();
             $user->setPassword($this->password);
             $user->generateAuthKey();
             return $this->user->save();
-        } return false;
+        }
+		return false;
     }
 
     /**

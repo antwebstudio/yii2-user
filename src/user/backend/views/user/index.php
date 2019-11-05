@@ -98,17 +98,17 @@ $gridColumns = [
 							'split' => true,
 							'tagName' => 'a', // Needed so that href option work
 							'options' => [
-								'href' => ['/user/user/activate', 'id' => $model->id],
+								'href' => ['/user/backend/user/activate', 'id' => $model->id],
 								'class' => 'btn-sm btn btn-success',
 							],
 							'dropdown' => [
 								'items' => [
-									['label' => 'Email Activation Code', 'url' => ['/user/user/email-activation-code', 'id' => $model->id]],
+									['label' => 'Email Activation Code', 'url' => ['/user/backend/user/email-activation-code', 'id' => $model->id]],
 								],
 							],
 						]);
-						$emailActivationButton = Html::tag('li', Html::a('Email Activation Code', ['/user/user/email-activation-code', 'id' => $model->id], ['class' => 'btn-sm btn btn-warning']));
-						$buttons = $emailActivationButton.Html::tag('li', Html::a('Activate', ['/user/user/unactivate', 'id' => $model->id], ['class' => 'btn-sm btn btn-success']));
+						$emailActivationButton = Html::tag('li', Html::a('Email Activation Code', ['/user/backend/user/email-activation-code', 'id' => $model->id], ['class' => 'btn-sm btn btn-warning']));
+						$buttons = $emailActivationButton.Html::tag('li', Html::a('Activate', ['/user/backend/user/unactivate', 'id' => $model->id], ['class' => 'btn-sm btn btn-success']));
 						return Html::tag('ul', $buttons, ['class' => 'dropdown-menu']);
 					}
 				},
@@ -116,9 +116,9 @@ $gridColumns = [
 					if (!$this->context->showApproveAction) return '';
 					
 					if ($model->isApproved) {
-						return Html::a('Unapprove', ['/user/user/unapprove', 'id' => $model->id], ['class' => 'btn-sm btn btn-warning']);
+						return Html::a('Unapprove', ['/user/backend/user/unapprove', 'id' => $model->id], ['class' => 'btn-sm btn btn-warning']);
 					} else {
-						return Html::a('Approve', ['/user/user/approve', 'id' => $model->id], ['class' => 'btn-sm btn btn-success']);
+						return Html::a('Approve', ['/user/backend/user/approve', 'id' => $model->id], ['class' => 'btn-sm btn btn-success']);
 					}
 				},
 				'update' => function ($url, $model, $key)

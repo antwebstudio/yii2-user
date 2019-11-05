@@ -20,6 +20,12 @@ class M191004071246Permissions extends Migration
 				'request-password-reset' => ['Request password reset', [Role::ROLE_GUEST]],
 				'reset-password' => ['Reset Password', [Role::ROLE_GUEST]],
 			],
+			\ant\user\backend\controllers\UserController::className() => [
+				'index' => ['Show user', [Role::ROLE_ADMIN]],
+				'update' => ['Update user', [Role::ROLE_ADMIN]],
+				'delete' => ['Delete user', [Role::ROLE_ADMIN]],
+				'update-password' => ['Update user password', [Role::ROLE_DEVELOPER]],
+			],
 		];
 		
 		parent::init();

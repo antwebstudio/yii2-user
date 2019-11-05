@@ -1,4 +1,5 @@
 <?php
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\bootstrap\Nav;
@@ -6,11 +7,11 @@ use yii\bootstrap\Nav;
 $this->title = 'User Profile - '.$model->username;
 
 $attributes = [
-    'firstname',
-    'lastname',
+    'profile.firstname',
+    'profile.lastname',
     'email',
-    'contact_number',
-    'user.created_at',
+    'profile.contact_number',
+    'created_at',
 ];
 
 if (isset($model->profile->attachments)) {
@@ -22,15 +23,11 @@ if (isset($model->profile->attachments)) {
 }
 
 ?>
-<?= Nav::widget([
-    'options' => [
-        'class' => 'nav-tabs',
-        'style' => 'margin-bottom: 15px'
-    ],
-    'items' => \Yii::$app->menu->getMenu(\ant\user\Module::MENU_VIEW_PROFILE, ['user' => $model]),
-]) ?>
+<?= $this->render('_tab', ['id' => $model->id]) ?>
+
+<a class="btn btn-primary" href="<?= Url::to(['/user/backend/user/update', 'id' => $model->id]) ?>">Edit</a>
 
 <?= DetailView::widget([
-    'model' => $model->profile,
+    'model' => $model,
     'attributes' => $attributes,
 ]) ?>
