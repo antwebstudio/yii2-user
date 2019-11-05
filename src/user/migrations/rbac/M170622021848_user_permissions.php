@@ -42,11 +42,6 @@ class M170622021848_user_permissions extends Migration
 				'view' => ['View user profile', [Role::ROLE_USER], 'ruleName' => IsOwnModelRule::className()],
 				'delete' => ['Delete user profile', [Role::ROLE_USER], 'ruleName' => IsOwnModelRule::className()],
 			],
-			UserController::className() => [
-				'index' => ['Show user', [Role::ROLE_ADMIN]],
-				'update' => ['Update user', [Role::ROLE_ADMIN]],
-				'delete' => ['Delete user', [Role::ROLE_ADMIN]],
-			],
 			InviteController::className() => [
 				'index' => ['Show user profiles', [Role::ROLE_ADMIN]],
 				'resend' => ['Resend invite', [Role::ROLE_ADMIN]],

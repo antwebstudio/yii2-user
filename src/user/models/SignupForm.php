@@ -69,6 +69,15 @@ class SignupForm extends \ant\base\FormModel
 			'configurable' => [
 				'class' => 'ant\behaviors\ConfigurableModelBehavior',
 			],
+			[
+				'class' => 'ant\behaviors\EventHandlerBehavior',
+				'events' => [
+					self::EVENT_BEFORE_COMMIT_SAVE => function($event) {
+						$user = $event->sender->user;
+						UserProfile::ensureExist($user->id);
+					}
+				],
+			],
 		];
 	}
 	
@@ -98,112 +107,6 @@ class SignupForm extends \ant\base\FormModel
 			],
 		];
 	}
-
-    protected function removeAppearWantToCutIn($signupType, $fieldsFormBuilderRowsToBeReStructure, $arrayAsNewRow) {
-		if (YII_DEBUG) throw new \Exception('DEPRECATED'); // since 2019-09-04
-        if (Yii::$app->getModule('user')->fieldsAppearToCutIn != null && Yii::$app->getModule('user')->fieldsAppearToCutIn[$signupType]) {
-            //$ascendingFieldsAppearToCutIn = Yii::$app->getModule('user')->fieldsAppearToCutIn[$signupType];
-            if ($arrayAsNewRow) {
-                unset($fieldsFormBuilderRowsToBeReStructure[key($fieldsFormBuilderRowsToBeReStructure)]);
-            }
-        }
-        return $fieldsFormBuilderRowsToBeReStructure;
-    }
-    protected function getAscendingFieldsAppearToCutIn($signupType) {
-		if (YII_DEBUG) throw new \Exception('DEPRECATED'); // since 2019-09-04
-        $ascendingFieldsAppearToCutIn = [];
-        if (Yii::$app->getModule('user')->fieldsAppearToCutIn != null && Yii::$app->getModule('user')->fieldsAppearToCutIn[$signupType]) {
-            $ascendingFieldsAppearToCutIn = Yii::$app->getModule('user')->fieldsAppearToCutIn[$signupType];
-            sort($ascendingFieldsAppearToCutIn);
-        }
-        return $ascendingFieldsAppearToCutIn;
-    }
-
-    public function cutArrayAccordingToItsRowSize($fieldsStoredAllFormBuilderRows) {
-		if (YII_DEBUG) throw new \Exception('DEPRECATED'); // since 2019-09-04
-        $fieldsFormBuilderRowsToBeReStructure = [];
-        foreach ($fieldsStoredAllFormBuilderRows as $key => $fieldStoredFormBuilderRows) {
-            $fieldsFormBuilderRowsToBeReStructure[] = array_chunk($fieldStoredFormBuilderRows, $key);
-        }
-        return $fieldsFormBuilderRowsToBeReStructure;
-    }
-    public function getFormRows($signupType = 'default'){
-		if (YII_DEBUG) throw new \Exception('DEPRECATED'); // since 2019-09-04
-
-        $fieldsStoredAllFormBuilderRows = $this->getFormAttribs($signupType);
-        $fieldsFormBuilderRowsToBeReStructure = $this->cutArrayAccordingToItsRowSize($fieldsStoredAllFormBuilderRows);
-        $arrayAsNewRow = end($fieldsFormBuilderRowsToBeReStructure);
-        $ascendingFieldsAppearToCutIn = $this->getAscendingFieldsAppearToCutIn($signupType);
-        $fieldsFormBuilderRowsToBeReStructure = $this->removeAppearWantToCutIn($signupType, $fieldsFormBuilderRowsToBeReStructure, $arrayAsNewRow);
-        $fields = $this->strucutureFieldsFormBuilderRowsToBeReStructure($fieldsFormBuilderRowsToBeReStructure);
-        $fields = $this->processArrayCutIn($fields, $ascendingFieldsAppearToCutIn, $arrayAsNewRow);
-        
-        return $fields;
-    }
-
-    protected function strucutureFieldsFormBuilderRowsToBeReStructure($fieldsFormBuilderRowsToBeReStructure) {
-        $fields = [];
-        foreach ($fieldsFormBuilderRowsToBeReStructure as $index_1 => $fieldsFormBuilderRowToBeReStructure){
-            foreach ($fieldsFormBuilderRowToBeReStructure as $index_2 => $fieldsToBeReStructure) {
-                $tempStructuredFields = [];
-                foreach ($fieldsToBeReStructure as $index_3 => $fieldToBeReStructure) {
-                    $tempStructuredFields = ArrayHelper::merge($tempStructuredFields, $fieldToBeReStructure);
-                }
-                $fields[] = $tempStructuredFields;
-            }
-        }
-        return $fields;
-    }
-
-    protected function processArrayCutIn($fields, $ascendingFieldsAppearToCutIn, $arrayAsNewRow) {
-        $array = [];
-        $i = 0;
-        foreach ($arrayAsNewRow[0][0] as $key2 => $value2) {
-            foreach ($value2 as $key3 => $value3) {
-                $array[$i++][]['attributes'][$key3] = $value3;
-            }
-        }
-        if (isset($ascendingFieldsAppearToCutIn) && is_array($ascendingFieldsAppearToCutIn)) {
-            foreach ($ascendingFieldsAppearToCutIn as $key => $value) {
-                array_splice($fields, $value, 0, $array[0]);
-                unset($array[0]);
-                if (isset($array)) {
-                    $array = array_values($array);
-                }
-            }
-        }
-        return $fields;
-    }
-
-    protected function getFormAttribs($signupType) {
-
-        $defaultFormBuilderColumnSpan = 2;
-        $fieldsStoredAllFormBuilderRows = [];
-        foreach (Yii::$app->getModule('user')->signUpModel[$signupType]['fields'] as $key => $value) {
-            if (Yii::$app->getModule('user')->signUpModel[$signupType]['fields'][$key]['record']['form'] == true) {
-
-                $indexRow = isset(Yii::$app->getModule('user')->signUpModel[$signupType]['fields'][$key]['formBuilderOptions']['rows']) ? Yii::$app->getModule('user')->signUpModel[$signupType]['fields'][$key]['formBuilderOptions']['rows'] : $defaultFormBuilderColumnSpan;
-                if (isset(Yii::$app->getModule('user')->signUpModel[$signupType]['fields'][$key]['formBuilderOptions']['rowToAppear']) ? Yii::$app->getModule('user')->signUpModel[$signupType]['fields'][$key]['formBuilderOptions']['rowToAppear'] : false) {
-
-                    $fieldsStoredAllFormBuilderRows[999]
-                    [
-                    Yii::$app->getModule('user')->signUpModel[$signupType]['fields'][$key]['formBuilderOptions']['rowToAppear']
-                    ]
-                    ['attributes'][$key] = Yii::$app->getModule('user')->signUpModel[$signupType]['fields'][$key]['field'];
-                } else { // not newRow
-                    $fieldsStoredAllFormBuilderRows[$indexRow][]['attributes'][$key] = Yii::$app->getModule('user')->signUpModel[$signupType]['fields'][$key]['field'];
-                }
-            }
-        }
-        return $fieldsStoredAllFormBuilderRows;
-    }
-
-    public function addFields($name){
-		if (YII_DEBUG) throw new \Exception('DEPRECATED'); // since 2019-09-04
-        if ( isset($this->_fields[$name]) ) {
-            $this->fields[$name] = $this->_fields[$name];
-        }
-    }
     public function init(){
         parent::init();
         foreach ($this->fields as $field => $name) {
@@ -255,6 +158,7 @@ class SignupForm extends \ant\base\FormModel
     }
 	
 	public function sendActivationEmail() {
+		if (YII_DEBUG) throw new \Exception('DEPRECATED'); // since 2019-11-05
 		ActivationCodeRequestForm::sendActivationEmail($this->user);
 	}
 

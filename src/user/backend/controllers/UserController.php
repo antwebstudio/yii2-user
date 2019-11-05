@@ -12,8 +12,6 @@ use trntv\filekit\actions\DeleteAction;
 use trntv\filekit\actions\UploadAction;
 
 use ant\base\MultiModel;
-use frontend\filters\AccessControl;
-use frontend\filters\AccessRule;
 use ant\address\models\Address;
 use ant\user\models\InviteRequest;
 use ant\user\models\UserInvite;
@@ -25,6 +23,7 @@ use ant\user\models\UserProfile;
 use ant\user\models\UserIdentity;
 use ant\user\models\UserSearch;
 use ant\user\models\SignupForm;
+use ant\user\models\PasswordForm;
 
 class UserController extends Controller
 {
@@ -92,6 +91,27 @@ class UserController extends Controller
         return $this->redirect(['index']);
 
     }
+	
+	public function actionUpdatePassword($id) {
+		$user = User::findOne($id);
+		
+        $model = new PasswordForm();
+		$model->needOldPassword = false;
+        $model->setUser($user);
+		
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->changePassword()) {
+                Yii::$app->session->setFlash('success', 'Change password success');
+                return $this->refresh();
+            } else {
+                Yii::$app->session->setFlash('danger', 'Invalid old password');
+            }
+        }
+
+		return $this->render($this->action->id, [
+            'model' => $model,
+		]);
+	}
 	
 	public function actionUpdateContact($id) {
 		

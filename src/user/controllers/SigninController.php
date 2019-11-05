@@ -94,7 +94,7 @@ class SigninController extends Controller
 
 		// Need to logout first to avoid user profile is being assigned to currently logged in user
         if ($model->load(Yii::$app->request->post()) && $model->validate() && Yii::$app->user->logout() && $user = $model->signup() ) {
-			Yii::$app->session->setFlash('success', 'You have succesfully signed up. Thank you for signup with us. ');
+			Yii::$app->session->setFlash('success', 'You have successfully signed up. Thank you for signing up with us. ');
             return $this->redirect(	isset($model->redirectUrl) ? $model->redirectUrl : Yii::$app->user->loginUrl);
         }
 

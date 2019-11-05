@@ -4,6 +4,7 @@ use yii\bootstrap\Nav;
 
 <?php //if (Yii::$app->getModule('user')->profileTab): ?>
 <?= Nav::widget([
+	'activateParents' => true,
     'options' => [
         'class' => 'nav-tabs',
         'style' => 'margin-bottom: 15px'
