@@ -17,6 +17,11 @@ class M181006095315_permissions extends Migration
 				'delete-collaborator' => ['Delete collaborator group map', [Role::ROLE_USER]],
 				'ajax-users' => ['Load user list for manage collaborator group', [Role::ROLE_USER]],
 			],
+			\ant\collaborator\backend\controllers\CollaboratorGroupController::className() => [
+				'manage' => ['Manage collaborator group', [Role::ROLE_USER]],
+				'delete-collaborator' => ['Delete collaborator group map', [Role::ROLE_USER]],
+				'ajax-users' => ['Load user list for manage collaborator group', [Role::ROLE_USER]],
+			],
 		];
 		
 		parent::init();
