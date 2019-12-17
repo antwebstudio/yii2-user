@@ -15,7 +15,6 @@
 		"yiisoft/yii2-authclient": "~2.0",
         "yii2-starter-kit/yii2-file-kit": "^2.0",
 		"antweb/yii2-core" : "*",
-		"antweb/yii2-core-module" : "*",
         "kartik-v/yii2-builder": "*"
 	},
     "require-dev": {
