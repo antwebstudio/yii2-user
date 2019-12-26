@@ -5,8 +5,9 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use ant\user\models\UserInvite;
+use ant\grid\ActionColumn;
 
-$this->title = 'Request invite form';
+$this->title = 'Users';
 $this->params['page-header']['title'] = $this->title;
 $this->params['page-header']['breadcrumbs'][] = $this->title;
 
@@ -24,8 +25,8 @@ $gridColumns = [
 ];
 ?>
 
-<?= $this->show('create', Html::a('Create User', ['/user/user/create'], ['class' => 'btn btn-primary'])) ?>
-<?= $this->show('invite', Html::a('Invite User', ['/user/invite'], ['class' => 'btn btn-primary'])) ?>
+<?= $this->show('create', Html::a('Create User', ['/user/backend/user/create'], ['class' => 'btn btn-primary'])) ?> 
+<?= $this->show('invite', Html::a('Invite User', ['/user/backend/invite'], ['class' => 'btn btn-primary'])) ?>
 
 <?php if (class_exists('kartik\export\ExportMenu')): ?>
 	<?= \kartik\export\ExportMenu::widget([
@@ -79,21 +80,50 @@ $gridColumns = [
 			'visible' => $this->context->showApproveAction,
 		],
         [
-			'class' => 'yii\grid\ActionColumn',
+			'class' => ActionColumn::class,
             'headerOptions' => ['class' => 'min-width'],
-            'template' => '{activate} {approve} {view} {update} {delete} ',
+            'template' => '{activate} {approve} {manage}',
             'contentOptions' => ['class' => 'text-right text-nowrap'],
             'header' => 'Actions',
 			'buttons' => [
+				'manage' => function($url, $model, $key) {
+					return ActionColumn::dropdown([
+						'label' => 'Edit',
+						'url' => ['/user/backend/user/update', 'id' => $key],
+						'items' => [
+							[
+								'label' => 'Update Password', 
+								'url' => ['/user/backend/user/update-password', 'id' => $model->id]
+							],
+							[
+								'label' => 'Delete', 
+								'url' => ['/user/backend/user/delete', 'id' => $model->id],
+								'method' => 'post',
+								'confirm' => ActionColumn::MESSAGE_DELETE_CONFIRM,
+							],
+						],
+					]);
+				},
 				'view' => function($url, $model, $key) {
 					return Html::a('View', $url, ['class' => 'btn-sm btn btn-default']);
 				},
 				'activate' => function($url, $model, $key) {
 					if ($model->isActive) {
 						$emailActivationButton = '';
-						return Html::a('Unactivate', ['/user/user/unactivate', 'id' => $model->id], ['class' => 'btn-sm btn btn-warning']);
+						return Html::a('Unactivate', ['/user/backend/user/unactivate', 'id' => $model->id], ['class' => 'btn-sm btn btn-warning']);
 					} else {
-						return \yii\bootstrap\ButtonDropdown::widget([
+						return ActionColumn::dropdown([
+							'label' => 'Activate',
+							'color' => 'success',
+							'url' => ['/user/backend/user/activate', 'id' => $model->id],
+							'items' => [
+								[
+									'label' => 'Email Activation Code', 
+									'url' => ['/user/backend/user/email-activation-code', 'id' => $model->id]
+								],
+							],
+						]);
+						return \yii\bootstrap4\ButtonDropdown::widget([
 							'label' => 'Activate',
 							'split' => true,
 							'tagName' => 'a', // Needed so that href option work
@@ -123,7 +153,7 @@ $gridColumns = [
 				},
 				'update' => function ($url, $model, $key)
 				{
-					return '<a href="'. Url::to(['user/update?id='. $model->id. '']) .'"><span class="glyphicon glyphicon-pencil"></span></a>';
+					return '<a href="'. Url::to(['user/backend/update?id='. $model->id. '']) .'"><span class="glyphicon glyphicon-pencil"></span></a>';
 				}
 			],
 		],

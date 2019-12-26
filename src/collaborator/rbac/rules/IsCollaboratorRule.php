@@ -20,4 +20,3 @@ class IsCollaboratorRule extends \ant\rbac\rules\IsOwnModelRule
         return $user && ($model->haveCollaborator($user) || $params['model']->isNewRecord || ($this->includeOwnedBy && $params['model']->{$this->attribute} == $user));
     }
 }
-?>

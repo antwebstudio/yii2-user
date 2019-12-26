@@ -5,7 +5,7 @@
 /* @var $model \ant\models\LoginForm */
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use ant\widgets\ActiveForm;
 
 $this->context->layout = '/small';
 
