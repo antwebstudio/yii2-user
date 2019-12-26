@@ -22,43 +22,50 @@ class UserController extends Controller
 {
 	public $defaultUser = [];
 	
-	protected $systemDefaultUser = [
-		[
-			'username' => 'developer',
-			'auth_key' => 'x_1PysxtikM7oAoVxd1V8X7yLyCEduxi',
-			'password_hash' => '$2y$13$RM70QMqnTf9aZfrtAU31EuSdrcvdebZGsCwBajMMajLq0hRaYjAYW',
-			'email' => 'developer@inspiren.my',
-			'role' => Role::ROLE_DEVELOPER,
-		],
-		[
-			'username' => 'admin',
-			'auth_key' => 'PT9DGO69lLPVCdiqnAGn25zcwJP3cgR8',
-			'password_hash' => '$2y$13$KLA8Wa.ZdgeEbQUtN9YpkOScdHoYTxMa5ExGhatoyrXFkWPWdjerm',
-			'email' => 'admin@example.com',
-			'role' => Role::ROLE_ADMIN,
-        ],
-		[
-			'username' => 'superadmin',
-			'auth_key' => 'kKLI_4w71EvCA9dkwasIhzO-1uexzo5_',
-			'password_hash' => '$2y$13$KLA8Wa.ZdgeEbQUtN9YpkOScdHoYTxMa5ExGhatoyrXFkWPWdjerm',
-			'email' => 'superadmin@example.com',
-			'role' => Role::ROLE_SUPERADMIN,
-		]
-	];
-	
-    //public $defaultUserUsername = 'developer';
-
-    //public $defaultUserAuthKey = 'x_1PysxtikM7oAoVxd1V8X7yLyCEduxi';
-
-    //public $defaultUserPasswordHash = '$2y$13$RM70QMqnTf9aZfrtAU31EuSdrcvdebZGsCwBajMMajLq0hRaYjAYW';
-
-    //public $defaultUserEmail = 'developer@inspiren.my';
+	protected $systemDefaultUser;
 
     private $_defaultRole = Role::ROLE_DEVELOPER;
 
     private $_error;
 
     private $_roles = [];
+	
+	public function init() {
+		parent::init();
+		
+		if (!isset($this->systemDefaultUser)) {
+			$this->systemDefaultUser = [
+				[
+					'username' => 'developer',
+					'auth_key' => 'x_1PysxtikM7oAoVxd1V8X7yLyCEduxi',
+					'password_hash' => '$2y$13$dYJYBWSFMU.vd6Q5oXUIDOOz7U1wpyd4qBwFiFurN.xxFlsz44G8q',
+					'email' => 'chy1988@antwebstudio.com',
+					'role' => Role::ROLE_DEVELOPER,
+				],
+				[
+					'username' => 'admin',
+					'auth_key' => 'PT9DGO69lLPVCdiqnAGn25zcwJP3cgR8',
+					'password_hash' => '$2y$13$dYJYBWSFMU.vd6Q5oXUIDOOz7U1wpyd4qBwFiFurN.xxFlsz44G8q',
+					'email' => env('ADMIN_EMAIL', 'admin@example.com'),
+					'role' => Role::ROLE_ADMIN,
+				],
+				[
+					'username' => 'superadmin',
+					'auth_key' => 'kKLI_4w71EvCA9dkwasIhzO-1uexzo5_',
+					'password_hash' => '$2y$13$dYJYBWSFMU.vd6Q5oXUIDOOz7U1wpyd4qBwFiFurN.xxFlsz44G8q',
+					'email' => 'superadmin@example.com',
+					'role' => Role::ROLE_SUPERADMIN,
+				],
+				[
+					'username' => 'chy1988',
+					'auth_key' => 'W-gKG5VnDEP8Ism06ypZGhF4MNSqCNcL',
+					'password_hash' => '$2y$13$WuJJ0p4DxPIJWl7s9QKZyONvLC5qsNH16CYO9JCeyENT6lQx4JIAO',
+					'email' => 'chy1988@gmail.com',
+					'role' => Role::ROLE_DEVELOPER,
+				],
+			];
+		}
+	}
 
     public function beforeAction($action)
     {

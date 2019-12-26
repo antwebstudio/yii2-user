@@ -48,7 +48,7 @@ class ProfileForm extends \ant\base\FormModel
 			'picture' => [
 				'next' => true,
 				'type' => 'widget',
-				'widgetClass' => \trntv\filekit\widget\Upload::className(),
+				'widgetClass' => \ant\file\widgets\Upload::className(),
 				'options' => [
 					'url' => [
 						'avatar-upload'

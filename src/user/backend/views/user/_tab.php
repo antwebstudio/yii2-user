@@ -1,5 +1,5 @@
 <?php 
-use yii\bootstrap\Nav;
+use ant\widgets\Nav;
 ?>
 
 <?php //if (Yii::$app->getModule('user')->profileTab): ?>
