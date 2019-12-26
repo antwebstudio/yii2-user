@@ -39,6 +39,12 @@ use ant\user\models\User;
 
 class UserInvite extends \yii\db\ActiveRecord
 {
+    const INVITE_TYPE_ROLE = 'role';
+    const INVITE_PROFILE_SETTING = 'profileSetting';
+    const INVITE_SHOW_FORM = 'showForm';
+    const INVITE_SHOW_CONFIG = 'showConfig';
+    const INVITE_TYPE_PROJECT = 'project';
+	
     const RESET_KEY_LENGTH = 40;
     /**
     * @status User status not active.

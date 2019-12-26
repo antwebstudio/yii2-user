@@ -17,6 +17,10 @@ class Permission extends \yii\base\Component {
 	protected $_description;
 	protected $auth = 'authManager';
 	protected $params = [];
+	
+	public static function can($action, $className = '') {
+		return Yii::$app->user->can(self::of($action, $className)->name);
+	}
 
 	public static function get($action, $className = '')
 	{

@@ -53,7 +53,12 @@ class GlobalAccessControl extends \yii\filters\AccessControl {
 	
 	public function init() {
 		$this->activateUrl = \Yii::$app->user->activateUrl;
-		$this->rules = array_merge($this->rules, $this->extraRules);
+		if (is_callable($this->extraRules)) {
+			$extraRules = call_user_func($this->extraRules, []);
+		} else {
+			$extraRules = $this->extraRules;
+		}
+		$this->rules = array_merge($this->rules, $extraRules);
 		return parent::init();
 	}
 
