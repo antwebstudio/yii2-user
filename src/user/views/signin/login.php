@@ -9,14 +9,14 @@ use ant\widgets\ActiveForm;
 
 $this->context->layout = '/small';
 
-$this->title = 'Login';
+$this->title = Yii::t('user', 'Login');
 $this->params['title'] = $this->title;
 
 $this->params['page-header']['title'] = $this->title;
 $this->params['page-header']['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-user-signin-login">
-	<p class="description">Please fill out the following fields to login.</p>
+	<p class="description"><?= Yii::t('user', 'Please fill out the following fields to login.') ?></p>
 
 	<?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
@@ -31,17 +31,17 @@ $this->params['page-header']['breadcrumbs'][] = $this->title;
 			</div>
 			<div class="col-6" style="text-align:right; text-decoration:underline;">
 				<div style="color:red;margin:1em 0;">
-					<?= Html::a('Forgot Password?', ['/user/signin/request-password-reset']) ?>
+					<?= Html::a(Yii::t('user', 'Forgot Password?'), ['/user/signin/request-password-reset']) ?>
 				</div>
 			</div>
 		</div>
 
 		<div class="form-group submit">
-			<?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+			<?= Html::submitButton(Yii::t('user', 'Login'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
 		</div>
 
 		<?php if (class_exists('yii\authclient\widgets\AuthChoice') && isset(Yii::$app->authClientCollection)): ?>
-			<div class="divider">OR</div>
+			<div class="divider"><?= Yii::t('user', 'OR') ?></div>
 
 			<?php $authAuthChoice = \yii\authclient\widgets\AuthChoice::begin([
 				'baseAuthUrl' => ['/user/auth-client/auth'],

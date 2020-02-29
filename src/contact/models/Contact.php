@@ -140,6 +140,10 @@ class Contact extends \yii\db\ActiveRecord implements NotifiableInterface
         ]);
     }
 	
+	public function getAttributeLabel($attribute) {
+		return \Yii::t('contact', parent::getAttributeLabel($attribute));
+	}
+	
 	public function getContactName() {
 		if (isset($this->contact_name)) {
 			return $this->contact_name;

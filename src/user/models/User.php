@@ -177,6 +177,10 @@ class User extends ActiveRecord implements IdentityInterface, NotifiableInterfac
 	public function attributeLabels() {
 		return $this->getCombinedAttributeLabels([]);
 	}
+	
+	public function getAttributeLabel($attribute) {
+		return \Yii::t('contact', parent::getAttributeLabel($attribute));
+	}
 
     /**
      * @inheritdoc

@@ -13,7 +13,7 @@ use kartik\builder\FormGrid;
 
 $this->context->layout = '/small';
 
-$this->title = 'Signup';
+$this->title = Yii::t('user', 'Signup');
 $this->params['title'] = $this->title;
 
 $this->params['page-header']['title'] = $this->title;
@@ -22,7 +22,7 @@ $this->params['page-header']['breadcrumbs'][] = $this->title;
 <div class="page-user-signin-signup">
 	<!--<div class="user-signup"><i class="fa fa-7x fa-user-plus"></i></div>-->
 	<!-- <p class="signUpTitle">REGISTER</p>-->
-	<p class="description">Please fill out the following fields to signup.</p>
+	<p class="description"><?= Yii::t('user', 'Please fill out the following fields to signup.') ?></p>
 
 	<?php $form = ActiveForm::begin() ?>
 
@@ -34,7 +34,7 @@ $this->params['page-header']['breadcrumbs'][] = $this->title;
 		<?= $form->field($model, 'confirmPassword')->passwordInput() ?>
 
 		<div class="form-group submit">
-			<?= Html::submitButton('Sign Up', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+			<?= Html::submitButton(Yii::t('user', 'Sign Up'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
 		</div>
 
 		<?php if (class_exists('yii\authclient\widgets\AuthChoice') && isset(Yii::$app->authClientCollection)): ?>

@@ -176,5 +176,9 @@ class SignupForm extends \ant\base\FormModel
             //'lastname' => 'Last Name',
 		]; 
     }
+	
+	public function getAttributeLabel($attribute) {
+		return \Yii::t('user', parent::getAttributeLabel($attribute));
+	}
          
 }

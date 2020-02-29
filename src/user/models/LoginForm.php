@@ -97,5 +97,9 @@ class LoginForm extends Model
             'password'=> 'Password',
         ];
     }
+	
+	public function getAttributeLabel($attribute) {
+		return \Yii::t('user', parent::getAttributeLabel($attribute));
+	}
 
 }

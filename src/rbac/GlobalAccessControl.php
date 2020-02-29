@@ -29,6 +29,11 @@ class GlobalAccessControl extends \yii\filters\AccessControl {
 			'allow' => true,
 		],
 		[
+			'modules' => ['translatemanager'],
+			'matchCallback' => [\ant\rbac\GlobalAccessControl::class, 'isAdmin'],
+			'allow' => true,
+		],
+		[
 			'modules' => ['crawler', 'cms', 'imagemanager', 'sandbox', 'gridview'],
 			'allow' => true,
 		],
