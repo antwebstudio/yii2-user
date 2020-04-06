@@ -216,14 +216,33 @@ class Address extends ActiveRecord
     }
 
     public function getAddressString() {
-        if (trim($this->address_1) != '' && trim($this->address_2) != '') {
-            return $this->address_1.', '.$this->address_2.'.';
-        } else if (trim($this->address_2) != '') {
-            return $this->address_2.'.';
+		$address1 = $this->trimAddress($this->address_1);
+		$address2 = $this->trimAddress($this->address_2);
+		
+        if ($address1 != '' && $address2 != '') {
+            return $address1.', '.$address2;
+        } else if ($address2 != '') {
+            return $address2;
         } else {
-            return $this->address_1.'.';
+            return $address1;
         }
     }
+	
+	protected function trimAddress($addressString) {
+		$addressString = trim($addressString);
+		$addressString = trim($addressString, ',');
+		return $addressString;
+	}
+	
+	public function getFullAddressString() {
+		return $this->trimAddress($this->getAddressString().', '.$this->postcode.' '.$this->getState());
+	}
+	
+	public function getState() {
+		if (isset($this->custom_state)) {
+			return $this->custom_state;
+		}
+	}
 
     /**
      * @return string

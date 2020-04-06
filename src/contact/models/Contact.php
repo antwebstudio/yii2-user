@@ -42,6 +42,9 @@ class Contact extends \yii\db\ActiveRecord implements NotifiableInterface
     const SCENARIO_BASIC_REQUIRED = 'basic_required';
     const SCENARIO_NO_REQUIRED = 'no_required';
 
+    public $_addressString = null;
+	public $_address = null;
+
 	public function behaviors() {
 		return [
 			'configurable' => [
@@ -69,8 +72,6 @@ class Contact extends \yii\db\ActiveRecord implements NotifiableInterface
         return '{{%contact}}';
     }
 
-    public $_addressString = null;
-
 	public function fields() {
         return \yii\helpers\ArrayHelper::merge(parent::fields(), [
 			'fullname',
@@ -91,7 +92,7 @@ class Contact extends \yii\db\ActiveRecord implements NotifiableInterface
             [['address_id', 'status', 'created_by', 'updated_by'], 'integer'],
             //[['created_by', 'updated_by'], 'required'],
             [['firstname', 'lastname', 'email', 'contact_number', 'fax_number', 'addressString'], 'safe'],
-            [['ic_passport', 'data', 'created_at', 'updated_at'], 'safe'],
+            [['addressData', 'ic_passport', 'data', 'created_at', 'updated_at'], 'safe'],
             [['firstname', 'lastname', 'contact_name', 'organization', 'contact_number', 'email'], 'string', 'max' => 255],
             [['address_id'], 'exist', 'skipOnError' => true, 'targetClass' => Address::className(), 'targetAttribute' => ['address_id' => 'id']],
 			[['status'], 'default', 'value' => 0],
@@ -122,7 +123,7 @@ class Contact extends \yii\db\ActiveRecord implements NotifiableInterface
      */
     public function attributeLabels()
     {
-        return $this->getCombinedAttributeLabels([
+        $labels = [
             'id' => 'ID',
             'firstname' => 'Firstname',
             'lastname' => 'Lastname',
@@ -137,7 +138,14 @@ class Contact extends \yii\db\ActiveRecord implements NotifiableInterface
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'addressString' => 'Address',
-        ]);
+        ];
+		
+		$address = new Address;
+		foreach (array_merge($address->attributes, $address->attributeLabels()) as $attribute => $label) {
+			$labels['addressData['.$attribute.']'] = $address->getAttributeLabel($attribute);
+		}
+		
+		return $this->getCombinedAttributeLabels($labels);
     }
 	
 	public function getAttributeLabel($attribute) {
@@ -173,6 +181,14 @@ class Contact extends \yii\db\ActiveRecord implements NotifiableInterface
         return $this->hasOne(User::className(), ['id' => 'user_id'])
             ->via('userProfile');
     }
+	
+	public function setAddressData($value) {
+		$this->_address = $value;
+	}
+	
+	public function getAddressData() {
+		return $this->_address;
+	}
 
     public function setAddressString($value) {
 		if (isset($this->address)) {
@@ -301,10 +317,16 @@ class Contact extends \yii\db\ActiveRecord implements NotifiableInterface
 	
 	public function afterSave($insert, $changedAttributes) {
 		$address = $this->ensureAddress();
+		$addressUpdated = false;
+		if (isset($this->_address)) {
+			$address->attributes = $this->_address;
+			$addressUpdated = true;
+		}
 		if (isset($this->_addressString)) {
 			$address->address_1 = $this->_addressString;
-			$address->save();
+			$addressUpdated = true;
 		}
+		if ($addressUpdated) $address->save();
 		return parent::afterSave($insert, $changedAttributes);
 	}
 
