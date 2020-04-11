@@ -13,7 +13,7 @@ use ant\user\models\ActivationCodeRequestForm;
 use ant\user\rbac\Role;
 use ant\user\models\UserProfile;
 
-class SignupForm extends \ant\base\FormModel
+class SignupForm extends \ant\web\FormModel
 {
 	const EVENT_AFTER_SIGNUP = 'after_signup';
 
@@ -91,6 +91,7 @@ class SignupForm extends \ant\base\FormModel
 					$user = $event->sender;
 					
 					$user->username = $this->username;
+					if (!isset($user->email) && isset($this->email)) $user->email = $this->email;
 					$user->setPassword($this->password);
 					$user->status = $this->defaultUserStatus;
 					$user->generateAuthKey();
@@ -123,6 +124,7 @@ class SignupForm extends \ant\base\FormModel
 		$usernamePatternRule = $this->allowEmailAsUsername ? [['username'], 'email'] : [['username'], 'match', 'pattern' => '/^[a-z]\w*$/i'];
 		
         return $this->getCombinedRules([
+			[[], 'required', 'on' => self::SCENARIO_BACKEND],
             ['username', 'trim'],
             [['username', '!usernameLength'], 'required'],
 			[['username', 'email'], 'filter', 'filter' => 'strtolower'],

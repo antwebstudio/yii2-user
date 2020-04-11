@@ -12,7 +12,7 @@ $this->title = 'Create New User';
 	'fieldClass' => 'ant\widgets\ActiveField',
 ]) ?>
 	
-	<?php if ($model instanceof \ant\base\FormModel): ?>
+	<?php if (false && $model instanceof \ant\base\FormModel): ?>
 	
 		<?= $form->errorSummary($model->getModels(), ['class' => 'alert alert-danger']) ?>
 		
