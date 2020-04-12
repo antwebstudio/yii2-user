@@ -104,7 +104,7 @@ class UserController extends Controller
                 Yii::$app->session->setFlash('success', 'Change password success');
                 return $this->refresh();
             } else {
-                Yii::$app->session->setFlash('danger', 'Invalid old password');
+                Yii::$app->session->setFlash('danger', Html::errorSummary($model->user));
             }
         }
 

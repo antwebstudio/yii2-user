@@ -1,16 +1,4 @@
-<?= \yii\bootstrap\Nav::widget([
-    'options' => [
-        'class' => 'nav-tabs',
-        'style' => 'margin-bottom: 15px'
-    ],
-    'items' => [
-        [
-            'label' => 'Profile',
-            'url' => ['/user/backend/setting/index'],
-        ],
-        [
-            'label' => 'Change Password',
-            'url' => ['/user/backend/setting/password'],
-        ]
-    ],
+<?= \ant\widgets\Tabs::widget([
+    'options' => ['class' => 'mb-4'],
+    'items' => Yii::$app->menu->getMenu(\ant\user\Module::MENU_PROFILE, ['id' => Yii::$app->user->id]),
 ]) ?>

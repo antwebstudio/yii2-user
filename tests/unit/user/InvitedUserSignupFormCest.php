@@ -1,7 +1,7 @@
 <?php
 namespace user;
 use \UnitTester;
-use ant\user\rbac\Role;
+use ant\rbac\Role;
 use ant\user\models\User;
 use ant\user\models\UserInvite;
 use ant\user\models\UserProfile;

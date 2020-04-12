@@ -98,12 +98,7 @@ class User extends ActiveRecord implements IdentityInterface, NotifiableInterfac
      */
     public static function find()
     {
-		$user = new User;
-		if ($user->hasAttribute('app_id')) {
-			return (new UserQuery(get_called_class()))->andWhere(['app_id' => env('APP_ID')	]);
-		} else {
-			return new UserQuery(get_called_class());
-		}
+		return new UserQuery(get_called_class());
     }
 
     /**
@@ -145,13 +140,18 @@ class User extends ActiveRecord implements IdentityInterface, NotifiableInterfac
         return
         [
             [['username', 'email'], 'required', 'on' => ['default', self::SCENARIO_EMAIL_AS_USERNAME]],
-			[['username', 'email'], 'filter', 'filter' => 'strtolower'],
+			[['username'], 'filter', 'filter' => 'strtolower', 'when' => function($model) {
+                return isset($model->username);
+            }],
+			[['email'], 'filter', 'filter' => 'strtolower', 'when' => function($model) {
+                return isset($model->email);
+            }],
 			[['email'], 'email'],
             [['username', 'status'], 'required', 'on' => self::SCENARIO_NO_REQUIRED_EMAIL],
-            [['username'], 'match', 'pattern' => '/^[a-z]\w*$/i', 'when' => function($model) {
+            [['username'], 'match', 'pattern' => '/^[a-z]\w*$/i', 'on' => self::SCENARIO_EMAIL_AS_USERNAME, 'when' => function($model) {
                 return strpos($model->username, '@') === false;
             }],
-            [['username'], 'email', 'when' => function($model) {
+            [['username'], 'email', 'on' => self::SCENARIO_EMAIL_AS_USERNAME, 'when' => function($model) {
                 return strpos($model->username, '@') !== false;
             }],
             ['username', 'compare', 'compareAttribute' => 'email', 'message' => 'Username and email not match', 'on' => self::SCENARIO_EMAIL_AS_USERNAME],

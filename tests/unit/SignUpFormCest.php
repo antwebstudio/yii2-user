@@ -3,7 +3,7 @@ namespace user;
 
 use Yii;
 use UnitTester;
-use ant\user\rbac\Role;
+use ant\rbac\Role;
 use ant\user\models\SignUpForm;
 use ant\user\models\User;
 

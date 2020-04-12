@@ -11,7 +11,7 @@ use yii\rbac\DBManager;
 use yii\helpers\Html;
 
 use ant\behaviors\TimestampBehavior;
-use ant\user\rbac\Role;
+use ant\rbac\Role;
 use ant\user\models\UserProfile;
 use ant\user\models\query\UserQuery;
 use ant\address\models\Address;

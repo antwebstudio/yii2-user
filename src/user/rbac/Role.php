@@ -20,6 +20,7 @@ class Role extends Component{
 	private $name = '';
 
 	public function __construct($name){
+		if (YII_DEBUG) throw new \Exception('DEPRECATED, user ant\rbac\Role instead. '); // 2020-04-13
 		$this->auth = \Yii::$app->get('authManager');
 		$this->name = $name;
 	}

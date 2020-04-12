@@ -9,7 +9,7 @@ use kartik\builder\Form;
 
 use ant\user\models\User;
 use ant\user\models\UserConfig;
-use ant\user\rbac\Role;
+use ant\rbac\Role;
 use ant\interfaces\ConfigurableModelInterface;    
 
 class UserConfigForm extends \ant\base\FormModel implements ConfigurableModelInterface

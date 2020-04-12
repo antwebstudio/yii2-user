@@ -2,7 +2,7 @@
 //namespace tests\codeception\common\user;
 //use tests\UnitTester;
 use yii\helpers\Html;
-use ant\user\rbac\Role;
+use ant\rbac\Role;
 use ant\user\models\User;
 use ant\user\models\UserProfile;
 use ant\user\models\SignupForm;
@@ -76,6 +76,25 @@ class UserCest
 			$model->username = $username;
 			$I->assertFalse($model->validate(), '"'.$username.'" is invalid username.');
 		}
+	}
+	
+	public function testValidatePassword(UnitTester $I) {
+		$password = '12345678';
+		
+		$model = new User(['scenario' => \ant\user\models\User::SCENARIO_NO_REQUIRED_EMAIL]);
+		$model->attributes = [
+			'username' => 'testsignup',
+			//'email' => 'test@gmail.com',
+			'status' => User::STATUS_ACTIVATED,
+		];
+		$model->setPassword($password);
+        $model->generateAuthKey();
+		
+		if (!$model->save()) throw new \Exception(print_r($model->errors, 1));
+		
+		$model->refresh();
+		$I->assertTrue($model->validatePassword($password));
+		$I->assertFalse($model->validatePassword($password.'1'));
 	}
 	
 	public function testValidateFailedEmailExisted(UnitTester $I) {

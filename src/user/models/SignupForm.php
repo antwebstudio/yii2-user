@@ -10,7 +10,7 @@ use kartik\builder\Form;
 use ant\commands\SendEmailCommand;
 use ant\user\models\User;
 use ant\user\models\ActivationCodeRequestForm;
-use ant\user\rbac\Role;
+use ant\rbac\Role;
 use ant\user\models\UserProfile;
 
 class SignupForm extends \ant\web\FormModel

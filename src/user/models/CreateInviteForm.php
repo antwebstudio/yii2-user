@@ -10,7 +10,7 @@ use ant\user\models\InviteRequest;
 use ant\token\models\Token;
 use ant\user\models\User;
 use ant\user\models\UserConfig;
-use ant\user\rbac\Role;
+use ant\rbac\Role;
 use ant\user\models\AdvancedSignupForm;
 
 /**

@@ -66,7 +66,7 @@ class PasswordForm extends Model
             $user = $this->getUser();
             $user->setPassword($this->password);
             $user->generateAuthKey();
-            return $this->user->save();
+            return $this->user->save(false);
         }
 		return false;
     }

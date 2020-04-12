@@ -1,7 +1,7 @@
 <?php
 //namespace tests\codeception\ant\rbac;
 //use Yii;
-use ant\user\rbac\Role;
+use ant\rbac\Role;
 use ant\rbac\Permission;
 use ant\rbac\rules\IsOwnModelRule;
 //use tests\codeception\common\UnitTester;

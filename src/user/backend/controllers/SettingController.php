@@ -136,7 +136,7 @@ class SettingController extends Controller
         $model->setUser(Yii::$app->user->identity);
         if ($model->load(Yii::$app->request->post())) {
             if ($model->changePassword()) {
-                Yii::$app->session->setFlash('success', 'Change password success');
+                Yii::$app->session->setFlash('success', 'Password is changed successfully.');
                 return Yii::$app->response->redirect(Url::current());
             } else {
                 Yii::$app->session->setFlash('danger', 'Invalid old password');

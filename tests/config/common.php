@@ -37,6 +37,13 @@ return [
 		'urlManagerFrontEnd' => [
 			'class' => 'yii\web\UrlManager',
 		],
+		'i18n' => [
+			'translations' => [
+				'*' => [
+					'class' => 'yii\i18n\PhpMessageSource'
+				],
+			],
+		],
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;port=3306;dbname=test_test',
