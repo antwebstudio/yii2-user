@@ -53,9 +53,8 @@ class Contact extends \yii\db\ActiveRecord implements NotifiableInterface
 			['class' => \yii\behaviors\BlameableBehavior::className()],
             ['class' => \ant\behaviors\TimestampBehavior::className()],
             [
-                'class' => \ant\behaviors\SerializeBehavior::className(),
+                'class' => \ant\behaviors\SerializableAttribute::class,
                 'attributes' => ['data'],
-                'serializeMethod' => \ant\behaviors\SerializeBehavior::METHOD_JSON,
             ],
             [
 				'class' => \ant\behaviors\DuplicatableBehavior::className(),

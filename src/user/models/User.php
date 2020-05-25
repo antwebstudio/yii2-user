@@ -157,6 +157,7 @@ class User extends ActiveRecord implements IdentityInterface, NotifiableInterfac
             ['username', 'compare', 'compareAttribute' => 'email', 'message' => 'Username and email not match', 'on' => self::SCENARIO_EMAIL_AS_USERNAME],
 			
 			['email', 'string', 'max' => 255],
+			['username', 'unique'],
             ['email', 'unique', 'message' => 'This email address has already been taken.'],
             ['email', 'trim'],
 			

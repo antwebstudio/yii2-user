@@ -92,9 +92,8 @@ class UserInvite extends \yii\db\ActiveRecord
             ['class' => TimestampBehavior::className()],
             ['class' => BlameableBehavior::className()],
 			[
-				'class' => 'ant\behaviors\SerializeBehavior',
+				'class' => \ant\behaviors\SerializableAttribute::class,
 				'attributes' => ['data'],
-				'serializeMethod' => \ant\behaviors\SerializeBehavior::METHOD_JSON,
 			]
         ];
     }

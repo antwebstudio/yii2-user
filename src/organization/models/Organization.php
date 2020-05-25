@@ -48,9 +48,8 @@ class Organization extends \yii\db\ActiveRecord
 				],
 			],
             [
-                'class' => \ant\behaviors\SerializeBehavior::className(),
+                'class' => \ant\behaviors\SerializableAttribute::class,
                 'attributes' => ['data'],
-                'serializeMethod' => \ant\behaviors\SerializeBehavior::METHOD_JSON,
             ],
 		];
 	}

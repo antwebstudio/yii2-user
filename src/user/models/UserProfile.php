@@ -89,9 +89,8 @@ class UserProfile extends ActiveRecord
                 'class' => TimestampBehavior::className(),
             ],
             [
-                'class' => \ant\behaviors\SerializeBehavior::className(),
+                'class' => \ant\behaviors\SerializableAttribute::class,
                 'attributes' => ['data'],
-                'serializeMethod' => \ant\behaviors\SerializeBehavior::METHOD_JSON,
             ],
             [
             	'class' => \ant\behaviors\AttachBehaviorBehavior::className(),
