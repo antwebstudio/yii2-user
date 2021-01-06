@@ -9,6 +9,7 @@ class GlobalAccessControl extends \yii\filters\AccessControl {
 	public $ruleConfig = ['class' => 'ant\rbac\AccessRule'];
 	public $enabled = true;
 	public $extraRules = [];
+	public $userNeedActivation = true;
 	
 	protected $activateUrl;
 	protected $_permission = '';
@@ -129,7 +130,7 @@ class GlobalAccessControl extends \yii\filters\AccessControl {
     {
         if ($user !== false && $user->getIsGuest()) {
             $user->loginRequired();
-		} else if (!$user->identity->isActive()) {
+		} else if ($this->userNeedActivation && !$user->identity->isActive()) {
 			$this->activateRequired();
         } else {
 			if (YII_DEBUG) {
