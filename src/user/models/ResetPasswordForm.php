@@ -93,8 +93,8 @@ class ResetPasswordForm extends Model
     public function attributeLabels()
     {
         return [
-            'password'=> 'Password',
-            'confirmPassword'=> 'Confirm Password'
+            'password'=> \Yii::t('user', 'Password'),
+            'confirmPassword'=> \Yii::t('user', 'Confirm Password'),
         ];
     }
 }

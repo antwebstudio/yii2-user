@@ -49,6 +49,15 @@ class SigninController extends Controller
         ];
     }
 
+    protected function redirectAfterLogin($formModel = null) {
+        if (isset(Yii::$app->user->returnUrl)) {
+            return $this->redirect(Yii::$app->user->returnUrl);
+        } else if (isset($formModel) && isset($formModel->redirectUrl)) {
+            return $this->redirect($formModel->redirectUrl);
+        }
+        return $this->goHome();
+    }
+
     /**
      * Logs in a user.
      *
@@ -62,7 +71,7 @@ class SigninController extends Controller
 		$model = $this->module->getFormModel('login');
 		
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return Yii::$app->user->identity->isActive ? $this->goHome() : $this->redirect(Yii::$app->user->activateUrl);
+            return $this->redirectAfterLogin();
         }
 		
 		return $this->render('login', [
@@ -94,8 +103,8 @@ class SigninController extends Controller
 
 		// Need to logout first to avoid user profile is being assigned to currently logged in user
         if ($model->load(Yii::$app->request->post()) && $model->validate() && Yii::$app->user->logout() && $user = $model->signup() ) {
-			Yii::$app->session->setFlash('success', 'You have successfully signed up. Thank you for signing up with us. ');
-            return $this->redirect(	isset($model->redirectUrl) ? $model->redirectUrl : Yii::$app->user->loginUrl);
+			Yii::$app->session->setFlash('success', Yii::t('user', 'You have successfully signed up. Thank you for signing up with us. '));
+            return $this->redirectAfterLogin($model);
         }
 
         return $this->render('signup', [
