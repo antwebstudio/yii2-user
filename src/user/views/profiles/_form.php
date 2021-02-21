@@ -56,7 +56,7 @@ $this->params['sideNav'] = $sideNav;
             
             <?= $form->field($model->getModel('profile'), 'email')->textInput() ?>
             
-            <?= $form->field($model->getModel('profile'), 'contact')->textInput() ?>
+            <?= $form->field($model->getModel('profile'), 'contact_number')->textInput() ?>
 
             <?= ddress::widget([
                 'model' => $model->getModel('address'),

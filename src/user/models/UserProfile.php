@@ -60,6 +60,20 @@ class UserProfile extends ActiveRecord
 		
 		return $model;
 	}
+
+    public function ensureContact($attributes) {
+        if (!isset($this->contact)) {
+            $contact = new Contact();
+            $contact->attributes = $attributes;
+            if (!$contact->save()) throw new \Exception(print_r($contact->errors, 1));
+            $this->contact_id = $contact->id;
+            if (!$this->save()) throw new \Exception(print_r($this->errors, 1));
+        } else {
+            $this->contact->attributes = $attributes;
+            if (!$this->contact->save()) throw new \Exception(print_r($this->contact->errors, 1));
+        }
+        return true;
+    }
 	
 	public static function createEmptyRecord($userId, $isMainProfile = false) {
 		$model = new self(['scenario' => self::SCENARIO_NO_REQUIRED]);

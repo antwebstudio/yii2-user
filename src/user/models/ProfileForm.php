@@ -76,7 +76,7 @@ class ProfileForm extends \ant\base\FormModel
 					UserProfile::GENDER_FEMALE => 'Female',
 				],
 			],
-			'contact' => [
+			'contact_number' => [
 				'next' => true,
 				'type' => 'textInput',
 			],

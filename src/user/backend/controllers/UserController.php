@@ -204,6 +204,13 @@ class UserController extends Controller
         ]);*/
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->profile->ensureContact([
+                'firstname' => $model->profile->firstname,
+                'lastname' => $model->profile->lastname,
+                'contact_number' => $model->profile->contact_number,
+                'email' => $model->profile->email,
+            ]);
+
 			Yii::$app->session->setFlash('success', 'Update Profile successfully');
 			return $this->refresh();
         }
