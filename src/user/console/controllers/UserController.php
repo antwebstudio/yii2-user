@@ -162,7 +162,7 @@ class UserController extends Controller
 				$params['registered_ip'] = '127.0.0.1';
 				unset($params['role']);
 
-				$this->createUser($params, $user['role'], false);
+				$this->createUser($params, $user['role'], false, true);
 
 				$this->stdout("\nDefault user generate successfully.\n", Console::FG_GREEN);
 			} else {
@@ -189,7 +189,7 @@ class UserController extends Controller
 		}
     }
 
-    protected function createUser($params, $role, $generateAuthKey = true)
+    protected function createUser($params, $role, $generateAuthKey = true, $throwException = false)
     {
         $user = new User($params);
 
@@ -197,7 +197,10 @@ class UserController extends Controller
 
         if($generateAuthKey) $user->generateAuthKey();
 
-        if (!$user->save()) return false;
+        if (!$user->save()) {
+            if ($throwException) throw new \Exception(print_r($user->errors, 1));
+            return false;
+        }
 
         $user->afterSignup($role);
 
