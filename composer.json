@@ -25,11 +25,7 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-		{
-			"type": "composer",
-			"url": "http://packagist.antwebstudio.com"
-		}
+        }
     ],
     "autoload": {
         "psr-4": {
