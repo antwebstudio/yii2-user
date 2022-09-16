@@ -157,7 +157,7 @@ class UserController extends Controller
         $this->stdout("Generating default user ... \n");
 		
 		foreach ($this->systemDefaultUser as $user) {
-			if ($this->validUsername($user['username'])) {
+			if ($this->validUsername($user['username']) && $this->validEmail($user['email'])) {
 				$params = $user;
 				$params['registered_ip'] = '127.0.0.1';
 				unset($params['role']);
@@ -171,7 +171,7 @@ class UserController extends Controller
 		}
 		
 		foreach ($this->defaultUser as $user) {
-			if ($this->validUsername($user['username'])) {
+			if ($this->validUsername($user['username']) && $this->validEmail($user['email'])) {
 				$user = ArrayHelper::merge([
 					'status' => 2,
 					'registered_ip' => '127.0.0.1',
